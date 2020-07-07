@@ -1,4 +1,5 @@
 # Write your code below game_hash
+require 'pry'
 def game_hash
   {
     home: {
@@ -127,3 +128,89 @@ def game_hash
 end
 
 # Write code here
+def num_points_scored(players_name)
+  game_hash.each do |location, team_data|
+  team_data.each do |attribute, data|
+  next unless attribute == :players
+  
+   data.each do |new_item|
+     return new_item[:points] if new_item [:player_name] == players_name
+      
+      end
+    end
+  end
+end
+
+def shoe_size(players_name)
+  game_hash.each do |location, team_data|
+    team_data.each do |attribute, data|
+      next unless attribute == :players 
+      
+      data.each do |new_item|
+        return new_item[:shoe] if new_item [:player_name] == players_name
+end
+end
+end
+end
+
+def team_colors(colors)
+game_hash.each do |location, team_data|
+    return game_hash[location][:colors] if team_data[:team_name] == colors
+  end
+end
+
+def team_names
+  game_hash.collect do |location, team_data|
+    team_data[:team_name]
+  end
+end
+
+def player_numbers(team_name)
+  nums = []
+  game_hash.each do |_place, team|
+    next unless team[:team_name] == team_name
+
+    team.each do |attribute, data|
+      next unless attribute == :players
+
+      data.each do |data|
+        nums << data[:number]
+      end
+    end
+  end
+  nums
+end
+
+def player_stats(players_name)
+  new_hash = {}
+  game_hash.collect do |place, team|
+    team.each do |attribute, data|
+      next unless attribute == :players
+
+      game_hash[place][attribute].each do |player|
+        next unless player[:player_name] == players_name
+
+        new_hash = player.delete_if do |key, value|
+          value == :player_name
+        end
+      end
+    end
+  end
+  new_hash
+end
+
+
+def big_shoe_rebounds
+  biggest_shoe = 0
+  num_rebounds = 0
+
+  game_hash.each do |_team, game_data|
+    game_data[:players].each do |player|
+      if player[:shoe] > biggest_shoe
+        biggest_shoe = player[:shoe]
+        num_rebounds = player[:rebounds]
+      end
+    end
+  end
+  num_rebounds
+end
