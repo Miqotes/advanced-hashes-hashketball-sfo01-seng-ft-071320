@@ -148,9 +148,9 @@ def shoe_size(players_name)
       
       data.each do |new_item|
         return new_item[:shoe] if new_item [:player_name] == players_name
-end
-end
-end
+      end
+    end
+  end
 end
 
 def team_colors(colors)
